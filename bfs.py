@@ -20,13 +20,11 @@ graph = [
     [8, 2]
 ]
 visited = [False for i in graph];
-shortest_path = [None for i in graph];
 q = queue.Queue();
 
-def solve_bfs(start, end):
+def bfs(start, end):
     print("Starting from node " + str(start));
     q.put(start);
-    shortest_path[start] = 0;
 
 
     while not q.empty():
@@ -34,7 +32,6 @@ def solve_bfs(start, end):
         if not visited[curr]:
             ## make some processing
             visited[curr] = True;
-            shortest_path[curr] = start;
             print("Processing node: " + str(curr));
             
         for next in graph[curr]:
@@ -42,17 +39,5 @@ def solve_bfs(start, end):
                 print("Adding neighbour " + str(next));
                 q.put(next);
 
-def print_path(computed_path):
-    path = "";
-    for index, item in enumerate(computed_path):
-        if index == len(computed_path) - 1:
-            path += str(item);
-        else:
-            path += str(item) + " -> ";
-    print(path);
 
-
-def bfs(start_node, end_node):
-    solve_bfs(start_node);
-
-bfs(0, len(graph)-1)
+bfs(0)
