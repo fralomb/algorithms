@@ -18,15 +18,18 @@ class LinkedList:
                 node.next = tmp;
                 self.head = node;
 
-    # [1, 2, 3, 4]
-    # [2, 1, 3, 4]
-    # [3, 2, 1, 4]
-    # [4, 3, 2, 1]
+    # [1 -> 2 -> 3 -> 4]
+    # [2 -> 1 -> 3 -> 4]
+    # [3 -> 2 -> 1 -> 4]
+    # [4 -> 3 -> 2 -> 1]
     def reverse(self, head):
 
         curr = head;
         prev = head;
+        count=0;
         while True:
+            count+=1;
+            print("Iteration " + str(count));
             if prev.next == None:
                 break;
             next = prev.next;
@@ -38,6 +41,27 @@ class LinkedList:
             curr = next;
         self.head = curr;
 
+    # 1 -> 2 -> 3 -> 4
+    # 1 -> None                 | 2 -> 3 -> 4 -> None
+    # 2 -> 1 -> None            | 3-> 4 -> None
+    # 3 -> 2 -> 1 -> None       | 4 -> None
+    # 4 -> 3 -> 2 -> 1 -> None  | None
+    def reverse1(self, head):
+        curr = head;
+        prev = None;
+
+        count=0;
+        while True:
+            count+=1;
+            print("Iteration " + str(count));
+            
+            new_curr = curr.next;
+            curr.next = prev;
+            prev = curr;
+            if not new_curr:
+                break;
+            curr = new_curr;
+        self.head = curr;
 
     
     def printList(self):
@@ -54,4 +78,6 @@ ls.printList();
 ls.init([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 ls.printList();
 ls.reverse(ls.head);
+ls.printList();
+ls.reverse1(ls.head);
 ls.printList();
